@@ -8,7 +8,9 @@
 	<div align="center">
 		<%if @college.present? && @department.present?%>
 			<%= link_to 'Back',college_department_staffs_path(@college, @department),class:"btn btn-warning",style:"color:black;" %>
-		<%else current_user.user_type == User::DEPARTMENT%>
+		<%elsif @department.present?%>
+			<%= link_to 'Back',department_staffs_path(@department),class:"btn btn-warning",style:"color:black;" %>
+		<%else %>
 			<%= link_to 'Back',staffs_path,class:"btn btn-warning",style:"color:black;" %>
 		<% end -%>
 	</div>

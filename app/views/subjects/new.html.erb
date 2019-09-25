@@ -8,6 +8,8 @@
 	<div align="center">
 		<%if @college.present? && @department.present?%>
 			<%= link_to 'Back',college_department_subjects_path(@college, @department),class:"btn btn-warning",style:"color:black;" %>
+		<%elsif @department.present?%>
+			<%= link_to 'Back',department_subjects_path(@department),class:"btn btn-warning",style:"color:black;" %>
 		<%else%>
 			<%= link_to 'Back', subjects_path,class:"btn btn-warning",style:"color:black;" %>
 		<% end -%>

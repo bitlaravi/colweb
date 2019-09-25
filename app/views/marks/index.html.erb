@@ -10,8 +10,15 @@
   <%if @college.present? && @department.present? && @student.present? %>
     <%= link_to 'Add Marks', new_college_department_student_mark_path(@college, @department,@student),class: "btn btn-success",style:"color:black;" %>
     <%= link_to 'back', college_department_student_path(@college,@department,@student),class: "btn btn-warning",style:"color:black;" %>
+  <%elsif @department.present? && @student.present? %>
+    <%= link_to 'Add Marks', new_department_student_mark_path( @department,@student),class: "btn btn-success",style:"color:black;" %>
+    <%= link_to 'back', department_student_path(@department,@student),class: "btn btn-warning",style:"color:black;" %>
+  <%elsif @student.present? %>
+    <%= link_to 'Add Marks', new_student_mark_path( @student),class: "btn btn-success",style:"color:black;" %>
+    <%= link_to 'back', student_path(@student),class: "btn btn-warning",style:"color:black;" %>
   <%else%>
-  <%end%>
+    <%= link_to 'back', department_path(@department),class: "btn btn-warning",style:"color:black;" %>
+  <% end -%>
 </div><br>
 
 <table class="table table-striped table-bordered ">
@@ -38,6 +45,14 @@
           <td><%= link_to 'Show', college_department_student_mark_path(@college,@department,@student,mark),class: "btn btn-info",style:"color:black;" %>    
               <%= link_to 'Edit', edit_college_department_student_mark_path(@college,@department,@student,mark),class: "btn btn-primary",style:"color:black;" %>    
               <%= link_to 'Destroy', college_department_student_mark_path(@college,@department,@student,mark),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%elsif @department.present? && @student.present? %>
+          <td><%= link_to 'Show', department_student_mark_path(@department,@student,mark),class: "btn btn-info",style:"color:black;" %>    
+              <%= link_to 'Edit', edit_department_student_mark_path(@department,@student,mark),class: "btn btn-primary",style:"color:black;" %>    
+              <%= link_to 'Destroy', department_student_mark_path(@department,@student,mark),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%elsif @student.present? %>
+          <td><%= link_to 'Show', student_mark_path(@student,mark),class: "btn btn-info",style:"color:black;" %>    
+              <%= link_to 'Edit', edit_student_mark_path(@student,mark),class: "btn btn-primary",style:"color:black;" %>    
+              <%= link_to 'Destroy', student_mark_path(@student,mark),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%else%>
           <td><%= link_to 'Show', marks_path(mark),class: "btn btn-info",style:"color:black;" %>
               <%= link_to 'Edit', edit_mark_path(mark),class: "btn btn-primary",style:"color:black;" %>

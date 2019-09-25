@@ -4,7 +4,13 @@ class SubjectsController < BaseController
   before_action :set_department
 
   def index
-    @subjects = Subject.where(college_id: params[:college_id],department_id: params[:department_id])
+    if @college.present? && @department.present?
+      @subjects = Subject.where(college_id: params[:college_id],department_id: params[:department_id]).order(subject: :asc)
+    elsif @department.present?
+      @subjects = Subject.where(department_id: params[:department_id]).order(subject: :asc)
+    else
+      @subjects = Subject.all.order(subject: :asc)
+    end
   end
 
   def show
@@ -21,7 +27,13 @@ class SubjectsController < BaseController
 
     if @subject.save
       if @college.present? && @department.present?
-      redirect_to college_department_subjects_path 
+        redirect_to college_department_subjects_path(@college,@department)
+      elsif @department.present?
+        redirect_to department_subjects_path(@department)
+
+      else
+        redirect_to subjects_path
+      end
     else
       render 'new'
     end
@@ -30,7 +42,12 @@ class SubjectsController < BaseController
   def update
     if @subject.update(subject_params)
       if @college.present? && @department.present?
-      redirect_to college_department_subjects_path 
+        redirect_to college_department_subjects_path(@college,@department)
+      elsif @department.present?
+          redirect_to department_subjects_path(@department)
+      else
+        redirect_to subjects_path
+      end
     else
        render 'edit'
     end
@@ -39,7 +56,12 @@ class SubjectsController < BaseController
   def destroy
     @subject.destroy
     if @college.present? && @department.present?
-    redirect_to college_department_subjects_url 
+      redirect_to college_department_subjects_path(@college,@department)
+    elsif @department.present?
+        redirect_to department_subjects_path(@department)
+    else
+      redirect_to subjects_path
+    end 
   end
 
   private
@@ -47,6 +69,7 @@ class SubjectsController < BaseController
       @subject = Subject.find(params[:id])
     end
     def set_departments
+      @colleges = College.pluck(:college_name,:id)
       @departments = Department.all.pluck(:college_id,:id)
     end
     def set_department

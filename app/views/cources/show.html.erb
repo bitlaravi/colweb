@@ -24,8 +24,11 @@
 </div>
 <div align="center">
   <%if @college.present? && @department.present?%>
-  	<%= link_to 'edit',edit_college_department_cource_path(@cource),class: "btn btn-success",style:"color:black;font-family:bold;" %>
-    <%= link_to 'Back', college_department_cources_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  	<%= link_to 'edit',edit_college_department_cource_path(@college,@department,@cource),class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to 'Back', college_department_cources_path(@college,@department,@cource),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%elsif @department.present?%>
+  	<%= link_to 'edit',edit_department_cource_path(@department,@cource),class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to 'Back', department_cources_path(@department,@cource),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%else%>
     <%= link_to 'edit',edit_student_path,class: "btn btn-success",style:"color:black;font-family:bold;" %>
     <%= link_to'back', colleges_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>

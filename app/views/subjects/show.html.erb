@@ -19,10 +19,13 @@
 </div>
 <div align="center">
   <%if @college.present? && @department.present? %>
-    <%= link_to 'Edit',  edit_college_department_subject_path(@subject) ,class: "btn btn-success",style:"color:black;font-family:bold;" %> |
-    <%= link_to 'Back', college_department_subjects_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+    <%= link_to 'Edit',  edit_college_department_subject_path(@college,@department,@subject) ,class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_subjects_path(@college,@department,@subject),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%elsif@department.present? %>
+    <%= link_to 'Edit',  edit_department_subject_path(@department,@subject),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', department_subjects_path(@department,@subject),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%else%>
-    <%= link_to 'edit',edit_subject_path,class: "btn btn-success",style:"color:black;font-family:bold;" %>
-    <%= link_to'back', subjects_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+    <%= link_to 'edit',edit_subject_path(@subject),class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to'back', subjects_path(@subject),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%end%>
 </div>

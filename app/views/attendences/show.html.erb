@@ -39,9 +39,15 @@
 </div>
 </div>
 <div align="center">
-  <%if @college.present? && @department.present? && @student %>
-    <%= link_to 'Edit', edit_college_department_student_attendence_path(@attendence),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
-    <%= link_to 'Back', college_department_student_attendences_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%if @college.present? && @department.present? && @student.present? %>
+    <%= link_to 'Edit', edit_college_department_student_attendence_path(@college,@department,@student,@attendence),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_student_attendences_path(@college,@department,@student,@attendence),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%elsif @department.present? && @student.present? %>
+    <%= link_to 'Edit', edit_department_student_attendence_path(@department,@student,@attendence),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', department_student_attendences_path(@department,@student,@attendence),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%elsif  @student.present? %>
+    <%= link_to 'Edit', edit_student_attendence_path(@student,@attendence),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', student_attendences_path(@student,@attendence),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%else%>
     <%= link_to 'edit',edit_attendence_path(@attendence),class: "btn btn-success",style:"color:black;font-family:bold;" %>
     <%= link_to'back', attendences_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>

@@ -7,9 +7,15 @@
 	<%= render 'form', mark: @mark %>
 	<div align="center">
 		<%if @college.present? && @department.present? && @student.present? %>
-			<%= link_to 'Back',college_department_student_marks_path(@college, @department),class:"btn btn-warning",style:"color:black;" %>
-		<%else current_user.user_type == User::DEPARTMENT %>
-			<%= link_to 'Back', marks_path,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Back',college_department_student_marks_path(@college, @department,@student),class:"btn btn-warning",style:"color:black;" %>
+		<%else %>
+			<%if @department.present? && @student.present? %>
+				<%= link_to 'Back',department_student_marks_path(@department,@student),class:"btn btn-warning",style:"color:black;" %>
+			<%elsif  @student.present? %>
+				<%= link_to 'Back',student_marks_path(@student),class:"btn btn-warning",style:"color:black;" %>
+			<%else%>
+				<%= link_to 'Back', marks_path,class:"btn btn-warning",style:"color:black;" %>
+			<% end -%>
 		<% end -%>
 	</div>
 </body>

@@ -6,6 +6,8 @@ class StudentsController < BaseController
   def index
     if @college.present? && @department.present?
       @students = Student.where(college_id: params[:college_id],department_id: params[:department_id]).order(student_name: :asc)
+    elsif @department.present?
+      @students = Student.where(department_id: params[:department_id]).order(student_name: :asc)
     else
       @students = Student.all.order(student_name: :asc)
     end
@@ -25,10 +27,12 @@ class StudentsController < BaseController
       if @student.save
         @user = User.create(email: @student.email, user_type: User::STUDENT, password: "password", password_confirmation: "password")
         @student.update(user_id: @user.id)
-          if @college.present? && @department.present?
-          redirect_to college_department_students_path  
+        if @college.present? && @department.present?
+          redirect_to college_department_students_path(@college, @department)
+        elsif @department.present?
+          redirect_to department_students_path(@department)
         else
-          redirect_to @student
+          redirect_to students_path
         end
       else
         render 'new'
@@ -38,9 +42,11 @@ class StudentsController < BaseController
   def update
       if @student.update(student_params)
         if @college.present? && @department.present?
-         redirect_to college_department_student_path 
+          redirect_to college_department_students_path(@college, @department)
+        elsif @department.present?
+          redirect_to department_students_path(@department) 
        else
-        redirect_to @student
+        redirect_to students_path
       end
       else
         render 'edit' 
@@ -50,9 +56,11 @@ class StudentsController < BaseController
   def destroy
     @student.destroy
     if @college.present? && @department.present?
-      redirect_to students_url 
+      redirect_to college_department_students_path(@college, @department) 
+    elsif @department.present?
+      redirect_to department_students_path(@department)
     else
-      redirect_to @student
+      redirect_to students_path
     end
   end
 

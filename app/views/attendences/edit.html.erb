@@ -9,9 +9,13 @@
 	<div>
 		<%= render 'form', attendence: @attendence %>
 		<%if @college.present? && @department.present? && @student.present? %>
-			<%= link_to 'Back',college_department_student_attendences_path,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Back',college_department_student_attendences_path(@college,@department,@student,@attendence),class:"btn btn-warning",style:"color:black;" %>
+		<%elsif @department.present? && @student.present? %>
+			<%= link_to 'Back',department_student_attendences_path(@department,@student,@attendence),class:"btn btn-warning",style:"color:black;" %>
+		<%elsif @student.present? %>
+			<%= link_to 'Back',student_attendences_path(@student,@attendence),class:"btn btn-warning",style:"color:black;" %>
 		<%else%>
-			<%= link_to 'Back', attendences_path ,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Back', attendences_path(@attendence),class:"btn btn-warning",style:"color:black;" %>
 		<% end -%>
 	</div>
 	

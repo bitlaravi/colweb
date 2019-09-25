@@ -24,10 +24,13 @@
 </div>
 <div align="center">
   <%if @college.present? && @department.present? %>
-    <%= link_to 'Edit',  edit_college_department_lab_specility_path(@lab_specility) ,class: "btn btn-success",style:"color:black;font-family:bold;" %> |
-    <%= link_to 'Back', college_department_lab_specilities_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+    <%= link_to 'Edit',  edit_college_department_lab_specility_path(@college,@department,@lab_specility) ,class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_lab_specilities_path(@college,@department,@lab_specility),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+ 	<%elsif @department.present?%>
+ 		<%= link_to 'Edit',  edit_department_lab_specility_path(@department,@lab_specility) ,class: "btn btn-success",style:"color:black;font-family:bold;" %>
+		<%= link_to 'Back',department_lab_specilities_path(@department,@lab_specility),class:"btn btn-warning",style:"color:black;" %>
   <%else%>
-    <%= link_to 'edit',edit_lab_specility_path,class: "btn btn-success",style:"color:black;font-family:bold;" %>
-    <%= link_to'back', lab_specilities_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+    <%= link_to 'edit',edit_lab_specility_path(@lab_specility),class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to'back', lab_specilities_path(@lab_specility),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%end%>
 </div>
