@@ -1,0 +1,71 @@
+<style >
+  label{color: red;}
+</style>
+<body>
+  <%= form_with(model: college, local: true) do |form| %>
+    <% if college.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(college.errors.count, "error") %> prohibited this college from being saved:</h2>
+
+        <ul>
+        <% college.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="container">
+      <form class="form-horizontal" action="/action_page.php">
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for=":email_id">College Email</label>
+          <div class="col-sm-6">
+           <%=form.text_field :email_id,class: 'form-control',placeholder:"Enter The College Email " %>
+          </div>
+        </div><br>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for=":college_name">College Name</label>
+          <div class="col-sm-6">
+           <%=form.text_field :college_name,class: 'form-control',placeholder:"Enter The College Name " %>
+          </div>
+        </div><br>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for=":college_code">College code</label>
+          <div class="col-sm-6">
+            <%=form.text_field :college_code,class: 'form-control',placeholder:"Enter The College Code " %>
+          </div>
+        </div><br>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="location">Location</label>
+          <div class="col-sm-5">
+            <%= form.select :location,options_for_select(["Chennai","Bangalore","Kerala","Andra","Trichy","Dheli"],college.location),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        </div><br>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="location">Location</label>
+          <div class="col-sm-5">
+            <%= form.select :college_type,options_for_select(["Engineering","Arts","Medical","Hotel Management",],college.college_type),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        </div><br>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="location">University</label>
+          <div class="col-sm-5">
+            <%= form.select :university,options_for_select(["Anna University","Priest University","Dheli University"],college.university),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        </div><br><br>
+
+        <div class="form-group" align="center">        
+          <div class="col-sm-offset-2 col-sm-8">
+            <button type="submit" class="btn btn-success">Submit the College Deatails</button>
+          </div>
+        </div><br><br>
+      </form>
+    </div>
+  <% end %>
+</body>

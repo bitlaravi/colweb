@@ -1,0 +1,11 @@
+<style >
+	body{background: url("<%= asset_path 'img11.jpg' %>");}
+</style>
+<body>
+	<h1 align="center" style="font-family: bold;color: #db34eb;">New Collge Create</h1><br>
+
+	<%= render 'form', college: @college %>
+	<div align="center">
+		<%= link_to 'Back', colleges_path,class:"btn btn-warning",style:"color:black;"  %>
+	</div>
+</body>

@@ -1,0 +1,58 @@
+<style >
+  label{color: red;}
+</style>
+<%= form_with(model: [@college,department], local: true) do |form| %>
+  <% if department.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(department.errors.count, "error") %> prohibited this department from being saved:</h2>
+
+      <ul>
+      <% department.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<div class="container">
+  <form class="form-horizontal" action="/action_page.php">
+    <div class="form-group">
+      <%if @college.present? %>
+        <%= form.hidden_field :college_id, value: params[:college_id] %>
+      <%else%>
+        <label class="control-label col-sm-2" for=":college_id">College Id</label>
+        <div class="col-sm-8">
+          <%= form.select :college_id,options_for_select(@colleges,department.college_id),{include_blank:true}, {class: 'form-control'} %>
+        </div>
+      <% end -%>
+    </div><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email_id">Department Email</label>
+      <div class="col-sm-8">
+        <%= form.text_field :email_id,class: 'form-control',placeholder: "Enter The Department Email"%>  
+      </div>
+    </div><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="department_name">Department Name</label>
+      <div class="col-sm-8">
+        <%= form.text_field :department_name,class: 'form-control',placeholder: "Enter The Department Name"%>  
+      </div>
+    </div><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="department_code">Department Code</label>
+      <div class="col-sm-8">
+        <%= form.text_field :department_code,class: 'form-control',placeholder: "Enter The Department Code"%> 
+       </div>
+    </div><br><br><br>
+
+    <div class="form-group" align="center">        
+      <div class="col-sm-offset-2 col-sm-8">
+        <button type="submit" class="btn btn-success">Submit the Department Deatails</button>
+      </div>
+    </div><br><br>
+  </form>
+</div>
+<% end %>

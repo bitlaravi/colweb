@@ -1,0 +1,51 @@
+
+<style >
+  body{background: url("<%= asset_path 'bc.png' %>");}
+  h1{ font-family: bold;font-size: 4.5em;text-align: center;}
+  div{text-align: center;}
+  th{text-align: center;}
+</style>
+<h1>Marks</h1>
+<div>
+  <%if @college.present? && @department.present? && @student.present? %>
+    <%= link_to 'Add Marks', new_college_department_student_mark_path(@college, @department,@student),class: "btn btn-success",style:"color:black;" %>
+    <%= link_to 'back', college_department_student_path(@college,@department,@student),class: "btn btn-warning",style:"color:black;" %>
+  <%else%>
+  <%end%>
+</div><br>
+
+<table class="table table-striped table-bordered ">
+  <thead >
+    <tr class="table-success">
+      <th>S.NO</th>
+      <th>Student</th>
+      <th>Year</th>
+      <th>Mark</th>
+      <th>Result</th>
+      <th colspan="3">Deatails</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @marks.each_with_index do |mark,i| %>
+      <tr class="table-warning">
+        <td><%= i+1 %></td>
+        <td><%= mark.student.student_name %></td>
+        <td><%= mark.year %></td>
+        <td><%= mark.mark %></td>
+        <td><%= mark.result %></td>
+        <%if @college.present? && @department.present? && @student.present? %>
+          <td><%= link_to 'Show', college_department_student_mark_path(@college,@department,@student,mark),class: "btn btn-info",style:"color:black;" %>    
+              <%= link_to 'Edit', edit_college_department_student_mark_path(@college,@department,@student,mark),class: "btn btn-primary",style:"color:black;" %>    
+              <%= link_to 'Destroy', college_department_student_mark_path(@college,@department,@student,mark),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%else%>
+          <td><%= link_to 'Show', marks_path(mark),class: "btn btn-info",style:"color:black;" %>
+              <%= link_to 'Edit', edit_mark_path(mark),class: "btn btn-primary",style:"color:black;" %>
+              <%= link_to 'Destroy', mark_path(mark),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

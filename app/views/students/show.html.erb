@@ -1,0 +1,146 @@
+ <style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<div align="center">
+  <h1>Students Deatails</h1>
+  <div>
+    <%if @college.present? && @department.present?%>
+      <%= link_to 'Back', college_department_students_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+      <%= link_to 'marks',college_department_student_marks_path(@college,@department,@student),class: "btn btn-success",style:"color:black;font-family:bold;"%>     |    
+      <%= link_to 'atttendence',college_department_student_attendences_path(@college,@department,@student),class: "btn btn-primary",style:"color:black;font-family:bold;"%>|
+    <%else%>
+      <%= link_to 'marks', marks_path,class: "btn btn-success",style:"color:black;font-family:bold;"%>
+      <%= link_to 'Attendence', attendences_path,class: "btn btn-success",style:"color:black;font-family:bold;"%>
+    <% end -%>
+  </div><br>
+
+  <p>
+    <strong>college Name:</strong>
+    <%= @student.college.college_name %>
+  </p>
+
+  <p>
+    <strong>Department Name:</strong>
+    <%= @student.department.department_name%>
+  </p>
+
+  <p>
+    <strong>Register No:</strong>
+    <%= @student.register_no %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @student.email %>
+  </p>
+
+  <p>
+    <strong>Student name:</strong>
+    <%= @student.student_name %>
+  </p>
+
+  <p>
+    <strong>Fathers name:</strong>
+    <%= @student.fathers_name %>
+  </p>
+
+  <p>
+    <strong>Mothers name:</strong>
+    <%= @student.mothers_name %>
+  </p>
+
+  <p>
+    <strong>Dob:</strong>
+    <%= @student.dob %>
+  </p>
+
+  <p>
+    <strong>Gender:</strong>
+    <%= @student.gender %>
+  </p>
+
+  <p>
+    <strong>Age:</strong>
+    <%= @student.age %>
+  </p>
+
+  <p>
+    <strong>Hslc perscentage:</strong>
+    <%= @student.hslc_perscentage %>
+  </p>
+
+  <p>
+    <strong>Hsc perscentage:</strong>
+    <%= @student.hsc_perscentage %>
+  </p>
+
+  <p>
+    <strong>Year:</strong>
+    <%= @student.year %>
+  </p>
+
+  <p>
+    <strong>Semester:</strong>
+    <%= @student.semester %>
+  </p>
+
+  <p>
+    <strong>Accomadation:</strong>
+    <%= @student.accomadation %>
+  </p>
+
+  <p>
+    <strong>Date of joining:</strong>
+    <%= @student.date_of_joining %>
+  </p>
+
+  <p>
+    <strong>Address1:</strong>
+    <%= @student.address1 %>
+  </p>
+
+  <p>
+    <strong>Address2:</strong>
+    <%= @student.address2 %>
+  </p>
+
+  <p>
+    <strong>City:</strong>
+    <%= @student.city %>
+  </p>
+
+  <p>
+    <strong>District:</strong>
+    <%= @student.district %>
+  </p>
+
+  <p>
+    <strong>Pin:</strong>
+    <%= @student.pin %>
+  </p>
+
+  <p>
+    <strong>State:</strong>
+    <%= @student.state %>
+  </p>
+
+  <p>
+    <strong>Adhar no:</strong>
+    <%= @student.adhar_no %>
+  </p>
+
+  <p>
+    <strong>Pan no:</strong>
+    <%= @student.pan_no %>
+  </p>
+</div>
+<div align="center">
+  <%if @college.present? && @department.present? %>
+    
+  <%else%>
+    
+  <%end%>
+</div>

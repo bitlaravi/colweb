@@ -1,0 +1,64 @@
+<style >
+  label{color: red;}
+</style>
+<%= form_with(model: [@college,@department,@student,attendence], local: true) do |form| %>
+  <% if attendence.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(attendence.errors.count, "error") %> prohibited this attendence from being saved:</h2>
+
+      <ul>
+      <% attendence.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="container">
+    <form class="form-horizontal" action="/action_page.php">
+      <div class="form-group">
+        <%if @college.present? && @department.present? && @student.present? %>
+          <%= form.hidden_field :student_id,value: params[:student_id]%>
+        <%else%>
+          <label class="control-label col-sm-2" for=":student_id">Student Id</label>
+          <div class="col-sm-8">
+            <%= form.select :student_id,options_for_select(@students,attendence.student_id),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        <%end%>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="year">Year</label>
+        <div class="col-sm-4">
+          <%= form.select :year,options_for_select([["I-Year", 1],["II-Year", 2],["III-Year", 3],["IV-Year", 4]],attendence.year),{include_blank:true},{class: 'form-control'} %>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+      <label class="control-label col-sm-2" for="semester">Semester</label>
+        <div class="col-sm-4">
+          <%= form.select :semester,options_for_select([["1-sem",1],["2-sem",2],["3-sem",3],["4-sem",4],["5-sem",5],["6-sem",6],["7-sem",7],["8-sem",8]],attendence.semester),{include_blank:true},{class: 'form-control'} %>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="total_hours">Total Hours</label>
+        <div class="col-sm-4">
+          <%= form.number_field :total_hours, class: "form-control", placeholder: "Enter Your Total Hours"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="present">Present Hours</label>
+        <div class="col-sm-4">
+          <%= form.number_field :present, class: "form-control", placeholder: "Enter Your Present Hours"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group" align="center">        
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-success">Submit the Student Attendence Deatails</button>
+        </div>
+      </div><br><br>
+    </form>
+  </div>
+<% end %>

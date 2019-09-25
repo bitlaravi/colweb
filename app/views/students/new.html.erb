@@ -1,0 +1,15 @@
+<style >
+	body{background: url("<%= asset_path '113.jpg' %>");}
+	h1{font-family: bold;color: #db34eb;text-align: center;}
+</style>
+<body>
+	<h1>New Student Create</h1>
+	<%= render 'form', student: @student %>
+	<div align="center">
+		<%if @college.present? && @department.present?%>
+			<%= link_to 'Back',college_department_students_path(@college, @department),class:"btn btn-warning",style:"color:black;" %>
+		<%else%>
+			<%= link_to 'Back', students_path,class:"btn btn-warning",style:"color:black;" %>
+		<% end -%>
+	</div>
+</body>

@@ -1,0 +1,53 @@
+<style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<div align="center">
+<h1>Students Deatails</h1>
+
+  <p>
+    <strong>Department:</strong>
+    <%= @staff.department.department_name %>
+  </p>
+
+  <p>
+    <strong>Staff name:</strong>
+    <%= @staff.staff_name %>
+  </p>
+
+  <p>
+    <strong>Age:</strong>
+    <%= @staff.age %>
+  </p>
+
+  <p>
+    <strong>Posission:</strong>
+    <%= @staff.posission %>
+  </p>
+
+  <p>
+    <strong>Experience:</strong>
+    <%= @staff.experience %>
+  </p>
+
+  <p>
+    <strong>Contact no:</strong>
+    <%= @staff.contact_no %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @staff.email_id %>
+  </p>
+</div>
+<div align="center">
+  <%if @college.present? && @department.present? %>
+    <%= link_to 'Edit', edit_college_department_staff_path(@staff),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_staffs_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%else current_user.user_type == User::DEPARTMENT %>
+    <%= link_to 'edit',edit_staff_path,class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to'back', staffs_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%end%>
+</div>

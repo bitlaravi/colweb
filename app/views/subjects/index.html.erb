@@ -1,0 +1,48 @@
+<style >
+  body{background: url("<%= asset_path 'bc.png' %>");}
+  h1{ font-family: bold;font-size: 4.5em;text-align: center;}
+  div{text-align: center;}
+  th{text-align: center;}
+</style>
+<h1>Subjects</h1>
+<div>
+  <%if @college.present? && @department.present?%>
+    <%= link_to 'New Subject', new_college_department_subject_path(@college, @department),class: "btn btn-success",style:"color:black;" %>
+    <%= link_to 'back', college_department_path(@college,@department),class: "btn btn-warning",style:"color:black;" %>
+
+  <%else%>
+    <%= link_to 'New Student', new_subject_path,class: "btn btn-info",style:"color:black;" %>
+    <%= link_to 'Back', department_path,class:"btn btn-default",style:"color:black;"  %> 
+  <%end%>
+</div><br>
+<table class="table table-striped table-bordered ">
+  <thead>
+    <tr class="table-success">
+      <th>S.No</th>
+      <th>Subject code</th>
+      <th>Subject</th>
+      <th colspan="3">Deatails</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @subjects.each_with_index do |subject,i| %>
+      <tr class="table-warning">
+        <td><%= i+1 %></td>
+        <td><%= subject.subject_code %></td>
+        <td><%= subject.subject %></td>
+        <%if @college.present? && @department.present?%>
+          <td><%= link_to 'View The Deatails', college_department_subject_path(@college,@department,subject),class: "btn btn-info",style:"color:black;" %>   
+              <%= link_to 'Edit', edit_college_department_subject_path(@college,@department,subject),class: "btn btn-primary",style:"color:black;" %>   
+              <%= link_to 'Delete', college_department_subject_path(@college,@department,subject),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%else%>
+          <td><%= link_to 'View The Deatails', staff,class: "btn btn-info",style:"color:black;" %>
+              <%= link_to 'Edit', edit_staff_path(staff) ,class: "btn btn-primary",style:"color:black;"%>
+              <%= link_to 'Delete', staff,class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end -%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

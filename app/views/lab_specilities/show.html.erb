@@ -1,0 +1,33 @@
+<style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<div align="center">
+	<h1>Students Deatails</h1>
+
+	<p>
+	  <strong>Department:</strong>
+	  <%= @lab_specility.department.department_name %>
+	</p>
+
+	<p>
+	  <strong>Lab name:</strong>
+	  <%= @lab_specility.lab_name %>
+	</p>
+
+	<p>
+	  <strong>Lab incharge:</strong>
+	  <%= @lab_specility.lab_incharge %>
+	</p>
+</div>
+<div align="center">
+  <%if @college.present? && @department.present? %>
+    <%= link_to 'Edit',  edit_college_department_lab_specility_path(@lab_specility) ,class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_lab_specilities_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%else%>
+    <%= link_to 'edit',edit_lab_specility_path,class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to'back', lab_specilities_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%end%>
+</div>

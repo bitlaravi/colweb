@@ -1,0 +1,54 @@
+<style >
+  label{color: red;}
+</style>
+<%= form_with(model: [@college,@department,cource], local: true) do |form| %>
+  <% if cource.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cource.errors.count, "error") %> prohibited this cource from being saved:</h2>
+
+      <ul>
+      <% cource.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <form class="form-horizontal" action="/action_page.php">
+      <div class="form-group">
+        <%if @college.present? && @department.present?%>
+          <%= form.hidden_field :college_id,value: params[:college_id]%>
+        <%else%>
+          <label class="control-label col-sm-2" for=":college_id">College Id</label>
+          <div class="col-sm-8">
+            <%= form.select :college_id,options_for_select(@colleges,cource.college_id),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        <%end%>
+      </div><br><br>
+      <div class="form-group">
+        <%if @college.present? && @department.present?%>
+          <%= form.hidden_field :department_id,value: params[:department_id]%>
+        <%else%>
+          <label class="control-label col-sm-2" for="department_id">Department Id</label>
+          <div class="col-sm-8">
+            <%= form.select :department_id,options_for_select(@departments,cource.department_id),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        <% end -%>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="cource">Cource</label>
+        <div class="col-sm-4">
+          <%= form.select :cource,options_for_select(["BE","B.TECH","ME","M.TECH"],cource.cource),{include_blank:true},{class: 'form-control'} %>
+        </div>
+      </div><br><br>
+
+      <div class="form-group" align="center">        
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-success">Submit The Cource Deatails</button>
+        </div>
+      </div><br><br>
+    </form>
+  </div>
+<% end %>

@@ -1,0 +1,91 @@
+
+<style >
+  label{color: red;}
+</style>
+<%= form_with(model: [@college,@department,staff], local: true) do |form| %>
+  <% if staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(staff.errors.count, "error") %> prohibited this staff from being saved:</h2>
+
+      <ul>
+      <% staff.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <form class="form-horizontal" action="/action_page.php">
+      <div class="form-group">
+        <%if @college.present? && @department.present?%>
+          <%= form.hidden_field :college_id,value: params[:college_id]%>
+        <%else%>
+          <label class="control-label col-sm-2" for=":college_id">College Id</label>
+          <div class="col-sm-8">
+            <%= form.select :college_id,options_for_select(@colleges,staff.college_id),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        <%end%>
+      </div><br><br>
+
+      <div class="form-group">
+        <%if @college.present? && @department.present?%>
+          <%= form.hidden_field :department_id,value: params[:department_id]%>
+        <%else%>
+          <label class="control-label col-sm-2" for="department_id">Department Id</label>
+          <div class="col-sm-8">
+            <%= form.select :department_id,options_for_select(@departments,staff.department_id),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        <% end -%>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="staff_name">Staff Name</label>
+        <div class="col-sm-8">
+          <%= form.text_field :staff_name, class: "form-control", placeholder: "Enter Your Name"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="age">Age</label>
+        <div class="col-sm-8">
+          <%= form.number_field :age, class: "form-control", placeholder: "Enter Your Age"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="posission">Posission</label>
+        <div class="col-sm-4">
+          <%= form.select :posission,options_for_select(["HOD","Proffeser","Associate Proffeser","Assistent Proffeser","Lab Assistent","Temp Lecture","Accountent"],staff.posission),{include_blank:true},{class: 'form-control'} %>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="experience">Experiance</label>
+        <div class="col-sm-8">
+          <%= form.number_field :experience, class: "form-control", placeholder: "Enter Your Experiance"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="contact_no">Contact No</label>
+        <div class="col-sm-8">
+          <%= form.number_field :contact_no, class: "form-control", placeholder: "Enter Your Contact"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="email_id">Email</label>
+        <div class="col-sm-8">
+          <%= form.email_field :email_id, class: "form-control", placeholder: "Enter Your Email"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group" align="center">        
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-success">Submit the Staff Deatails</button>
+        </div>
+      </div><br><br>
+    </form>
+  </div>
+<% end %>

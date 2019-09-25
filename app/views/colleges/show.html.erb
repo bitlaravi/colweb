@@ -1,0 +1,39 @@
+<style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<h1>College Deatails</h1>
+  <p>
+    <strong>College Name:</strong>
+    <%= @college.college_name %>
+  </p><br>
+
+  <p>
+    <strong>College code:</strong>
+    <%= @college.college_code %>
+  </p><br>
+
+  <p>
+    <strong>College Email:</strong>
+    <%= @college.email_id %>
+  </p><br>
+
+  <p>
+    <strong>Location:</strong>
+    <%= @college.location %>
+  </p><br>
+
+  <p>
+    <strong>College type:</strong>
+    <%= @college.college_type %>
+  </p><br>
+
+  <p>
+    <strong>University:</strong>
+    <%= @college.university %>
+  </p><br>
+
+<%= link_to 'Edit', edit_college_path(@college),class:"btn btn-success",style:"color:black;"  %> |
+<%= link_to 'Back', colleges_path,class:"btn btn-warning",style:"color:black;"  %>

@@ -1,0 +1,28 @@
+<style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<div align="center">
+	<h1>Students Deatails</h1>
+
+	<p>
+	  <strong>Subject code:</strong>
+	  <%= @subject.subject_code %>
+	</p>
+
+	<p>
+	  <strong>Subject:</strong>
+	  <%= @subject.subject %>
+	</p>
+</div>
+<div align="center">
+  <%if @college.present? && @department.present? %>
+    <%= link_to 'Edit',  edit_college_department_subject_path(@subject) ,class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_subjects_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%else%>
+    <%= link_to 'edit',edit_subject_path,class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to'back', subjects_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%end%>
+</div>

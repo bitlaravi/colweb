@@ -1,0 +1,211 @@
+
+<style >
+  label{color: red;}
+</style>
+<%= form_with(model: [@college,@department,student], local: true) do |form| %>
+<% if student.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+    <ul>
+    <% student.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="container">
+  <form class="form-horizontal" action="/action_page.php">
+    <div class="form-group">
+      <%if @college.present? && @department.present?%>
+        <%= form.hidden_field :college_id,value: params[:college_id]%>
+      <%else%>
+        <label class="control-label col-sm-2" for=":college_id">College Id</label>
+        <div class="col-sm-8">
+          <%= form.select :college_id,options_for_select(@colleges,student.college_id),{include_blank:true},{class: 'form-control'} %>
+        </div>
+      <%end%>
+    </div><br><br>
+    <div class="form-group">
+      <%if @college.present? && @department.present?%>
+        <%= form.hidden_field :department_id,value: params[:department_id]%>
+      <%else%>
+        <label class="control-label col-sm-2" for="department_id">Department Id</label>
+        <div class="col-sm-8">
+          <%= form.select :department_id,options_for_select(@departments,student.department_id),{include_blank:true},{class: 'form-control'} %>
+        </div>
+      <% end -%>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="register_no">Register No</label>
+      <div class="col-sm-8">
+        <%= form.text_field :register_no, class: "form-control", placeholder: "Enter Register No"%>
+      </div>
+    </div><br><br>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="student_name">Student Name</label>
+      <div class="col-sm-8">
+        <%= form.text_field :student_name, class: "form-control", placeholder: "Enter Your Name"%>
+      </div>
+    </div><br><br>
+    
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="fathers_name">Fathers Name</label>
+      <div class="col-sm-8">
+        <%= form.text_field :fathers_name, class: "form-control", placeholder: "Enter Fathers Name"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="mothers_name">Mothers Name</label>
+      <div class="col-sm-8">
+        <%= form.text_field :mothers_name, class: "form-control", placeholder: "Enter Mothers Name"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="dob">Date of Birth</label>
+      <div class="col-sm-3">
+        <%= form.date_field :dob, class: "form-control"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="gender">Gender</label>
+      <div class="form-group">
+        <label class="mr-3" >
+            <input type="radio" class="mr-1" name="gender"> Male
+        </label>
+        <label class="mr-3">
+            <input type="radio" class="mr-1" name="gender"> Female
+        </label>
+        <label class="mr-3">
+            <input type="radio" class="mr-1" name="gender"> Others
+        </label>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="age">Age</label>
+      <div class="col-sm-3">
+        <%= form.number_field :age, class: "form-control", placeholder: "Enter Your Age"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="email">Email Id</label>
+      <div class="col-sm-3">
+        <%= form.email_field :email, class: "form-control", placeholder: "Enter The Email"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="hslc_perscentage">HSLC Perscentage</label>
+      <div class="col-sm-3">
+        <%= form.text_field :hslc_perscentage, class: "form-control", placeholder: "Enter HSLC Perscentage"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="hsc_perscentage">HSC Perscentage</label>
+      <div class="col-sm-3">
+        <%= form.text_field :hsc_perscentage, class: "form-control", placeholder: "Enter HSC Perscentage"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="year">Year</label>
+      <div class="col-sm-4">
+        <%= form.select :year,options_for_select([["I-Year", 1],["II-Year", 2],["III-Year", 3],["IV-Year", 4]],student.year),{include_blank:true},{class: 'form-control'} %>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="semester">Semester</label>
+      <div class="col-sm-4">
+        <%= form.select :semester,options_for_select([["1-sem",1],["2-sem",2],["3-sem",3],["4-sem",4],["5-sem",5],["6-sem",6],["7-sem",7],["8-sem",8]],student.semester),{include_blank:true},{class: 'form-control'} %>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="accomadation">Accomadation</label>
+      <div class="col-sm-4">
+        <%= form.select :accomadation,options_for_select(["Dayscholer","Hostel"],student.accomadation),{include_blank:true},{class: 'form-control'} %>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="date_of_joining">Date Of Joining</label>
+      <div class="col-sm-4">
+        <%= form.date_field :date_of_joining, class: "form-control", placeholder: "Select YourJoining Date"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="address1">Address 1</label>
+      <div class="col-sm-6">
+        <%= form.text_field :address1, class: "form-control", placeholder: "Enter Address1"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="address2">Address 2</label>
+      <div class="col-sm-6">
+        <%= form.text_field :address2, class: "form-control", placeholder: "Enter Address2"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="city">City</label>
+      <div class="col-sm-6">
+        <%= form.text_field :city, class: "form-control", placeholder: "Enter City"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="district">District</label>
+      <div class="col-sm-4">
+        <%= form.select :district,options_for_select(["Chennai","Trichy","Coiambathur","Madurai","Tirunelveli","Perambalur","Ariyalur","Salem"],student.district),{include_blank:true},{class: 'form-control'} %>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="state">State</label>
+      <div class="col-sm-4">
+        <%= form.select :state,options_for_select(["Tamil Nadu","Karnataka","Kerala","Andra","Dheli","Kolkatha","M.P","U.P","Jarkand","Mumbai"],student.state),{include_blank:true},{class: 'form-control'} %>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pin">Pin Number</label>
+      <div class="col-sm-4">
+        <%= form.text_field :pin, class: "form-control", placeholder: "Enter Pin Number"%>
+      </div>
+    </div><br><br>
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="adhar_no">Adhar Number</label>
+      <div class="col-sm-6">
+        <%= form.text_field :adhar_no, class: "form-control", placeholder: "Enter Adhar Number"%>
+      </div>
+    </div><br><br>
+
+
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="pan_no">PAN Number</label>
+      <div class="col-sm-6">
+        <%= form.text_field :pan_no, class: "form-control", placeholder: "Enter PAN Number"%>
+      </div>
+    </div><br><br><br>
+
+    <div class="form-group" align="center">        
+      <div class="col-sm-offset-2 col-sm-8">
+        <button type="submit" class="btn btn-success">Submit the Student Deatails</button>
+      </div>
+    </div><br><br>
+  </form>
+</div>
+<% end %>

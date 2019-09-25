@@ -1,0 +1,17 @@
+<style >
+	body{background: url("<%= asset_path 'img5.jpg' %>");}
+	h1{font-family: bold;color: #db34eb;text-align: center;}
+	div{text-align: center;}
+</style>
+<body>
+	<h1>Editing Staff Deatails</h1>
+	<div>
+		<%= render 'form', staff: @staff %>
+		<%if @college.present? && @department.present?%>
+			<%= link_to 'Back',college_department_staffs_path,class:"btn btn-warning",style:"color:black;" %>
+		<%else%>
+			<%= link_to 'Back', staffs_path ,class:"btn btn-warning",style:"color:black;" %>
+		<% end -%>
+	</div>
+	
+</body>

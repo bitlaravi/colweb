@@ -1,0 +1,12 @@
+<style >
+	body{background: url("<%= asset_path 'img5.jpg' %>");}
+</style>
+<body>
+	<h1 align="center" style="font-family: bold;color: #db34eb;">Editing The College Deatails</h1><br>
+
+	<%= render 'form', college: @college %>
+	<div align="center">
+		<%= link_to 'Show', @college ,class:"btn btn-success",style:"color:black;"%> |
+		<%= link_to 'Back', colleges_path ,class:"btn btn-warning",style:"color:black;"%>
+	</div>
+</body>

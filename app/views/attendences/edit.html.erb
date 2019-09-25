@@ -1,0 +1,18 @@
+<style >
+	body{background: url("<%= asset_path 'img5.jpg' %>");}
+	h1{font-family: bold;color: #db34eb;text-align: center;}
+	div{text-align: center;}
+</style>
+<body>
+	<p id="notice"><%= notice %></p>
+	<h1>Editing Student Attendence Deatails</h1>
+	<div>
+		<%= render 'form', attendence: @attendence %>
+		<%if @college.present? && @department.present? && @student.present? %>
+			<%= link_to 'Back',college_department_student_attendences_path,class:"btn btn-warning",style:"color:black;" %>
+		<%else%>
+			<%= link_to 'Back', attendences_path ,class:"btn btn-warning",style:"color:black;" %>
+		<% end -%>
+	</div>
+	
+</body>

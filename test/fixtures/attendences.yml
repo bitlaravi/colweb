@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  total_hours: MyString
+  present: MyString
+  absent: MyString
+  average: MyString
+  exam_eligibility: MyString
+
+two:
+  student: two
+  total_hours: MyString
+  present: MyString
+  absent: MyString
+  average: MyString
+  exam_eligibility: MyString

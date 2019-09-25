@@ -1,0 +1,17 @@
+<style >
+	body{background: url("<%= asset_path 'img5.jpg' %>");}
+	h1{font-family: bold;color: #db34eb;text-align: center;}
+	div{text-align: center;}
+</style>
+<body>
+	<h1>Editing The Lab Specility Deatails</h1>
+	<div>
+		<%= render 'form', lab_specility: @lab_specility %>
+		<%if @college.present? && @department.present?%>
+			<%= link_to 'Back',college_department_lab_specilities_path,class:"btn btn-warning",style:"color:black;" %>
+		<%else%>
+			<%= link_to 'Back', lab_specilities_path ,class:"btn btn-warning",style:"color:black;" %>
+		<% end -%>
+	</div>
+	
+</body>

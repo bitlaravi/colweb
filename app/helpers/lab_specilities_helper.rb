@@ -1,0 +1,2 @@
+module LabSpecilitiesHelper
+end

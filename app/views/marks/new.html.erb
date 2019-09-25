@@ -1,0 +1,16 @@
+<style >
+	body{background: url("<%= asset_path '113.jpg' %>");}
+	h1{font-family: bold;color: #db34eb;text-align: center;}
+</style>
+<body>
+	<h1>New Student Marks Enter</h1><br>
+	<%= render 'form', mark: @mark %>
+	<div align="center">
+		<%if @college.present? && @department.present? && @student.present? %>
+			<%= link_to 'Back',college_department_student_marks_path(@college, @department),class:"btn btn-warning",style:"color:black;" %>
+		<%else current_user.user_type == User::DEPARTMENT %>
+			<%= link_to 'Back', marks_path,class:"btn btn-warning",style:"color:black;" %>
+		<% end -%>
+	</div>
+</body>
+

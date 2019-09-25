@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student: one
+  subject: MyString
+  year: MyString
+  mark: MyString
+  result: MyString
+
+two:
+  student: two
+  subject: MyString
+  year: MyString
+  mark: MyString
+  result: MyString

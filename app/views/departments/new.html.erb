@@ -1,0 +1,16 @@
+<style >
+	body{background: url("<%= asset_path '113.jpg' %>");}
+</style>
+<body>
+	<h1 align="center" style="font-family: bold;color: #db34eb;">New Department Create</h1><br>
+	<%= render 'form', department: @department %>
+	<div align="center">
+		<%if @college.present? %>
+			<%= link_to 'Back', college_departments_path(@college),class:"btn btn-warning",style:"color:black;" %>
+		<%else%>
+			<%= link_to 'Back', departments_path,class:"btn btn-warning",style:"color:black;" %>
+		<% end -%>
+	</div>
+</body>
+
+

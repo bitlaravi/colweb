@@ -1,0 +1,49 @@
+<style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<p id="notice"><%= notice %></p>
+<div align="center">
+  <h1>Student Attendence Deatails</h1>
+  <p>
+    <strong>Student:</strong>
+    <%= @attendence.student.student_name %>
+  </p>
+
+  <p>
+    <strong>Total hours:</strong>
+    <%= @attendence.total_hours %>
+  </p>
+
+  <p>
+    <strong>Present:</strong>
+    <%= @attendence.present %>
+  </p>
+
+  <p>
+    <strong>Absent:</strong>
+    <%= @attendence.absent %>
+  </p>
+
+  <p>
+    <strong>Average:</strong>
+    <%= @attendence.average %>
+  </p>
+
+  <p>
+    <strong>Exam eligibility:</strong>
+    <%= @attendence.exam_eligibility %>
+  </p>
+</div>
+</div>
+<div align="center">
+  <%if @college.present? && @department.present? && @student %>
+    <%= link_to 'Edit', edit_college_department_student_attendence_path(@attendence),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_student_attendences_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%else%>
+    <%= link_to 'edit',edit_attendence_path(@attendence),class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to'back', attendences_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%end%>
+</div>

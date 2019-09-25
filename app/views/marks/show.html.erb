@@ -1,0 +1,43 @@
+<style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<div align="center">
+  <h1>Student Marks Deatails</h1>
+
+  <p>
+    <strong>Student:</strong>
+    <%= @mark.student.student_name %>
+  </p>
+
+  <p>
+    <strong>Subject:</strong>
+    <%= @mark.subject%>
+  </p>
+
+  <p>
+    <strong>Year:</strong>
+    <%= @mark.year %>
+  </p>
+
+  <p>
+    <strong>Mark:</strong>
+    <%= @mark.mark %>
+  </p>
+
+  <p>
+    <strong>Result:</strong>
+    <%= @mark.result %>
+  </p>
+</div>
+<div align="center">
+  <%if @college.present? && @department.present? && @student %>
+    <%= link_to 'Edit', edit_college_department_student_mark_path(@mark),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_student_marks_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%else%>
+    <%= link_to 'edit',edit_mark_path(@mark),class: "btn btn-success",style:"color:black;font-family:bold;" %>
+    <%= link_to'back', marks_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%end%>
+</div>

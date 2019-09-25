@@ -1,0 +1,51 @@
+<style >
+  label{color: red;}
+</style>
+<%= form_with(model:[@college, @department, lab_specility], local: true) do |form| %>
+  <% if lab_specility.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lab_specility.errors.count, "error") %> prohibited this lab_specility from being saved:</h2>
+
+      <ul>
+      <% lab_specility.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <form class="form-horizontal" action="/action_page.php">
+      <div class="form-group">
+        <%if @college.present? && @department.present?%>
+          <%= form.hidden_field :department_id,value: params[:department_id]%>
+        <%else%>
+          <label class="control-label col-sm-2" for="department_id">Department Id</label>
+          <div class="col-sm-8">
+            <%= form.select :department_id,options_for_select(@departments,lab_specility.department_id),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        <% end -%>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="lab_name">Lab Name</label>
+        <div class="col-sm-8">
+          <%= form.text_field :lab_name, class: "form-control", placeholder: "Enter The Lab Name"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="lab_incharge">Lab Incharge</label>
+        <div class="col-sm-8">
+          <%= form.text_field :lab_incharge, class: "form-control", placeholder: "Enter The Lab Incharge"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group" align="center">        
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-success">Submit the Staff Deatails</button>
+        </div>
+      </div><br><br>
+    </form>
+  </div>
+<% end %>

@@ -1,0 +1,58 @@
+<style >
+  label{color: red;}
+</style>
+<%= form_with(model: [@college,@department,@student,mark], local: true) do |form| %>
+  <% if mark.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(mark.errors.count, "error") %> prohibited this mark from being saved:</h2>
+
+      <ul>
+      <% mark.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <form class="form-horizontal" action="/action_page.php">
+      <div class="form-group">
+        <%if @college.present? && @department.present? && @student.present? %>
+          <%= form.hidden_field :student_id,value: params[:student_id]%>
+        <%else%>
+          <label class="control-label col-sm-2" for=":student_id">Student Id</label>
+          <div class="col-sm-8">
+            <%= form.select :student_id,options_for_select(@students,mark.student_id),{include_blank:true},{class: 'form-control'} %>
+          </div>
+        <%end%>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="subject">Subject</label>
+        <div class="col-sm-8">
+            <%= form.select :subject,options_for_select(@subjects,mark.subject),{include_blank:true},{class: 'form-control'} %>
+          </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="year">Year</label>
+        <div class="col-sm-4">
+          <%= form.select :year,options_for_select([["I-Year", 1],["II-Year", 2],["III-Year", 3],["IV-Year", 4]],mark.year),{include_blank:true},{class: 'form-control'} %>
+        </div>
+      </div><br><br>
+
+      <div class="form-group">
+        <label class="control-label col-sm-2" for="mark">Mark</label>
+        <div class="col-sm-8">
+          <%= form.number_field :mark, class: "form-control", placeholder: "Enter Your Mark"%>
+        </div>
+      </div><br><br>
+
+      <div class="form-group" align="center">        
+        <div class="col-sm-offset-2 col-sm-8">
+          <button type="submit" class="btn btn-success">Submit the Student Marks Deatails</button>
+        </div>
+      </div><br><br>
+    </form>
+  </div>
+<% end %>

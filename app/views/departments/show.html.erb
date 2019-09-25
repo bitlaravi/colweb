@@ -1,0 +1,47 @@
+<style >
+  body{background: url("<%= asset_path '5.jpg' %>");}
+  strong{color: #91c29c;font-family: bild;font-size: 1em;text-align: center;}
+  p{color: blue;font-size: 1em;}
+  h1{color: red;font-family: bold;}
+</style>
+<div align="center">
+	<h1>Department Deatails</h1>
+	<p>
+	  <strong>College:</strong>
+	  <%= @department.college.college_name %>
+	</p>
+
+	<p>
+	  <strong>Department Email:</strong>
+	  <%= @department.email_id %>
+	</p>
+
+	<p>
+	  <strong>Department name:</strong>
+	  <%= @department.department_name %>
+	</p>
+
+	<p>
+	  <strong>Department code:</strong>
+	  <%= @department.department_code %>
+	</p>
+</div><br><br>
+<div align="center">
+		<%if @college.present? %>
+		  <%= link_to "Students Deatails", college_department_students_path(@college,@department),class: "btn btn-success",style:"color:black;font-family:bold;"  %>
+		  <%= link_to "cources Deatails", college_department_cources_path(@college,@department),class: "btn btn-info",style:"color:black;font-family:bold;"  %>
+		  <%= link_to "staffs Deatails", college_department_staffs_path(@college,@department),class: "btn btn-warning",style:"color:black;font-family:bold;"  %>
+		  <%= link_to "Subjects Deatails", college_department_subjects_path(@college,@department),class: "btn btn-danger",style:"color:black;font-family:bold;"  %>
+			<%= link_to 'Lab Deatails',college_department_lab_specilities_path(@college,@department),class: "btn btn-primary",style:"color:black;font-family:bold;"  %><br><br>
+			<%= link_to 'Edit', edit_college_department_path(@department),class:"btn btn-default",style:"color:black;"  %> |
+			<%= link_to 'Back', college_departments_path(@college),class:"btn btn-default",style:"color:black;" %>
+		<%else current_user.user_type == User::DEPARTMENT %>
+		<%= link_to "Students Deatails", department_students_path(@department),class: "btn btn-success",style:"color:black;font-family:bold;"  %>
+		  <%= link_to "staffs Deatails", department_staffs_path(@department),class: "btn btn-warning",style:"color:black;font-family:bold;"  %>
+		  <%= link_to "cources Deatails", department_cources_path(@department),class: "btn btn-info",style:"color:black;font-family:bold;"  %>
+		  <%= link_to "Subjects Deatails", department_subject_path(@department),class: "btn btn-danger",style:"color:black;font-family:bold;"  %>
+			<%= link_to 'Lab Deatails',department_lab_specilities_path(@department),class: "btn btn-primary",style:"color:black;font-family:bold;"  %><br><br>
+			<%= link_to 'Edit', edit_department_path(@department),class:"btn btn-default",style:"color:black;"  %> |
+		<% end -%>
+	</div>
+</div>

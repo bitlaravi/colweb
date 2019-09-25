@@ -1,0 +1,47 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  college: one
+  department: one
+  student_name: MyString
+  fathers_name: MyString
+  mothers_name: MyString
+  dob: MyString
+  age: 1
+  hslc_perscentage: MyString
+  hsc_perscentage: MyString
+  year: MyString
+  semester: MyString
+  accomadation: MyString
+  date_of_joining: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  district: MyString
+  pin: MyString
+  state: MyString
+  adhar_no: MyString
+  pan_no: MyString
+
+two:
+  college: two
+  department: two
+  student_name: MyString
+  fathers_name: MyString
+  mothers_name: MyString
+  dob: MyString
+  age: 1
+  hslc_perscentage: MyString
+  hsc_perscentage: MyString
+  year: MyString
+  semester: MyString
+  accomadation: MyString
+  date_of_joining: MyString
+  address1: MyString
+  address2: MyString
+  city: MyString
+  district: MyString
+  pin: MyString
+  state: MyString
+  adhar_no: MyString
+  pan_no: MyString
