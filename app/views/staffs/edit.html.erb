@@ -8,9 +8,11 @@
 	<div>
 		<%= render 'form', staff: @staff %>
 		<%if @college.present? && @department.present?%>
-			<%= link_to 'Back',college_department_staffs_path,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Back',college_department_staffs_path(@college,@department,@staff),class:"btn btn-warning",style:"color:black;" %>
+		<%elsif @department.present?%>
+			<%= link_to 'Back',department_staffs_path(@department,@staff),class:"btn btn-warning",style:"color:black;" %>
 		<%else%>
-			<%= link_to 'Back', staffs_path ,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Back', staffs_path(@staff) ,class:"btn btn-warning",style:"color:black;" %>
 		<% end -%>
 	</div>
 	

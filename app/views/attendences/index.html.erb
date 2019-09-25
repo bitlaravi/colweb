@@ -10,9 +10,14 @@
   <%if @college.present? && @department.present? && @student.present? %>
     <%= link_to 'Add Attendence', new_college_department_student_attendence_path(@college, @department,@student),class: "btn btn-success",style:"color:black;" %>
     <%= link_to 'back', college_department_student_path(@college,@department,@student),class: "btn btn-warning",style:"color:black;" %>
+  <%elsif @department.present? && @student.present? %>
+    <%= link_to 'Add Attendence', new_department_student_attendence_path( @department,@student),class: "btn btn-success",style:"color:black;" %>
+    <%= link_to 'back', department_student_path(@department,@student),class: "btn btn-warning",style:"color:black;" %>
+  <%elsif @student.present? %>
+    <%= link_to 'Add attendence', new_student_attendence_path( @student),class: "btn btn-success",style:"color:black;" %>
+    <%= link_to 'back', student_path(@student),class: "btn btn-warning",style:"color:black;" %>
   <%else%>
-    <%= link_to 'Add Attendence', new_attendence_path,class: "btn btn-info",style:"color:black;" %>
-    <%= link_to 'Back', @student,class:"btn btn-default",style:"color:black;"  %> 
+    <%= link_to 'back', department_path(@department),class: "btn btn-warning",style:"color:black;" %>
   <%end%>
 </div><br>
 
@@ -38,6 +43,14 @@
           <td><%= link_to 'Show', college_department_student_attendence_path(@college,@department,@student,attendence),class: "btn btn-info",style:"color:black;"  %>    
               <%= link_to 'Edit', edit_college_department_student_attendence_path(@college,@department,@student,attendence),class: "btn btn-warning",style:"color:black;"  %>   
               <%= link_to 'Destroy', college_department_student_attendence_path(@college,@department,@student,attendence),class: "btn btn-danger",style:"color:black;" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%elsif @department.present? && @student.present? %>
+          <td><%= link_to 'Show', department_student_attendence_path(@department,@student,attendence),class: "btn btn-info",style:"color:black;"  %>    
+              <%= link_to 'Edit', edit_department_student_attendence_path(@department,@student,attendence),class: "btn btn-warning",style:"color:black;"  %>   
+              <%= link_to 'Destroy', department_student_attendence_path(@department,@student,attendence),class: "btn btn-danger",style:"color:black;" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%elsif @student.present? %>
+          <td><%= link_to 'Show', student_attendence_path(@student,attendence),class: "btn btn-info",style:"color:black;"  %>    
+              <%= link_to 'Edit', edit_student_attendence_path(@student,attendence),class: "btn btn-warning",style:"color:black;"  %>   
+              <%= link_to 'Destroy', student_attendence_path(@student,attendence),class: "btn btn-danger",style:"color:black;" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%else%>
           <td><%= link_to 'Show', attendences_path(attendence),class: "btn btn-info",style:"color:black;" %>
               <%= link_to 'Edit', edit_attendence_path(attendence),class: "btn btn-primary",style:"color:black;" %>

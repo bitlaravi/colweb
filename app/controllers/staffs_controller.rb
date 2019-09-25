@@ -4,7 +4,13 @@ class StaffsController < BaseController
   before_action :set_department
 
   def index
-    @staffs = Staff.where(college_id: params[:college_id],department_id: params[:department_id])
+    if @college.present? && @department.present?
+      @staffs = Staff.where(college_id: params[:college_id],department_id: params[:department_id]).order(staff_name: :asc)
+    elsif @department.present?
+      @staffs = Staff.where(department_id: params[:department_id]).order(staff_name: :asc)
+    else
+      @staffs = Staff.all.order(staff_name: :asc)
+    end
   end
 
   def show
@@ -19,14 +25,15 @@ class StaffsController < BaseController
 
   def create
     @staff = Staff.new(staff_params)
-
     if @staff.save
       @user = User.create(email: @staff.email_id, user_type: User::STAFF, password: "password", password_confirmation: "password")
       @staff.update(user_id: @user.id)
       if @college.present? && @department.present?
-        redirect_to college_department_staffs_path  
+        redirect_to college_department_staffs_path(@college, @department)
+      elsif @department.present?
+        redirect_to department_staffs_path(@department)
       else
-        redirect_to @staff
+        redirect_to staffs_path
       end
     else
       render 'new'
@@ -35,9 +42,11 @@ class StaffsController < BaseController
   def update
     if @staff.update(staff_params)
       if @college.present? && @department.present?
-        redirect_to college_department_staff_path  
+        redirect_to college_department_staffs_path(@college, @department)
+      elsif @department.present?
+        redirect_to department_staffs_path(@department)  
       else
-        redirect_to @staff
+        redirect_to staffs_path
       end 
     else
       render 'edit'
@@ -47,9 +56,11 @@ class StaffsController < BaseController
   def destroy
     @staff.destroy
     if @college.present? && @department.present?
-      redirect_to college_department_staffs_path  
+      redirect_to college_department_staffs_path(@college, @department)
+    elsif @department.present?
+      redirect_to department_staffs_path(@department)  
     else
-      redirect_to @staff
+      redirect_to staffs_path
     end
   end
 
@@ -59,7 +70,7 @@ class StaffsController < BaseController
     end
     def set_departments
       @colleges = College.pluck(:college_name,:id)
-      @departments = Department.all.pluck(:college_name,:id)
+      @departments = Department.all.pluck(:department_name,:id)
     end
     def set_department
       @department = Department.find_by(id: params[:department_id])

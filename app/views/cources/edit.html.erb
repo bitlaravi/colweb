@@ -8,11 +8,14 @@
 	<div>
 		<%= render 'form', cource: @cource %>
 		<%if @college.present? && @department.present?%>
-			<%= link_to 'Show', college_department_cource_path,class:"btn btn-success",style:"color:black;" %> |
-			<%= link_to 'Back',college_department_cources_path,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Show', college_department_cource_path(@college,@department,@cource),class:"btn btn-success",style:"color:black;" %> |
+			<%= link_to 'Back',college_department_cources_path(@college,@department,@cource),class:"btn btn-warning",style:"color:black;" %>
+		<%elsif @department.present?%>
+			<%= link_to 'Show', department_cource_path(@department,@cource),class:"btn btn-success",style:"color:black;" %> |
+			<%= link_to 'Back',department_cources_path(@department,@cource),class:"btn btn-warning",style:"color:black;" %>
 		<%else%>
-			<%= link_to 'Show',staff_path,class:"btn btn-success",style:"color:black;" %> |
-			<%= link_to 'Back', staffs_path ,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Show',cource_path(cource),class:"btn btn-success",style:"color:black;" %> |
+			<%= link_to 'Back', cource_path(cource) ,class:"btn btn-warning",style:"color:black;" %>
 		<% end -%>
 	</div>
 	

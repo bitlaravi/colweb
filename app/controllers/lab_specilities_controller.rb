@@ -4,7 +4,11 @@ class LabSpecilitiesController < BaseController
   before_action :set_department
 
   def index
-    @lab_specilities = LabSpecility.where(department_id: params[:department_id])
+    if @department.present?
+      @lab_specilities = LabSpecility.where(department_id: params[:department_id])
+    else
+      @lab_specilities = LabSpecility.all
+    end
   end
 
   def show
@@ -18,10 +22,14 @@ class LabSpecilitiesController < BaseController
 
   def create
     @lab_specility = LabSpecility.new(lab_specility_params)
-
     if @lab_specility.save
       if @college.present? && @department.present? 
-      redirect_to college_department_lab_specilities_path 
+        redirect_to college_department_lab_specilities_path(@college, @department)
+      elsif @department.present?
+        redirect_to department_lab_specilities_path(@department) 
+      else
+        redirect_to lab_specilities_path
+      end
     else
       render 'new'
     end
@@ -29,8 +37,13 @@ class LabSpecilitiesController < BaseController
 
   def update
     if @lab_specility.update(lab_specility_params)
-      if @college.present? && @department.present?
-      redirect_to college_department_lab_specilities_path 
+      if @college.present? && @department.present? 
+        redirect_to college_department_lab_specilities_path(@college, @department)
+      elsif @department.present?
+        redirect_to department_lab_specilities_path(@department) 
+      else
+        redirect_to lab_specilities_path
+      end
     else
       render 'edit'
     end
@@ -38,8 +51,13 @@ class LabSpecilitiesController < BaseController
 
   def destroy
     @lab_specility.destroy
-    if @college.present? && @department.present?
-    redirect_to college_department_lab_specilities_url 
+    if @college.present? && @department.present? 
+        redirect_to college_department_lab_specilities_path(@college, @department)
+    elsif @department.present?
+      redirect_to department_lab_specilities_path(@department)
+    else
+      redirect_to lab_specilities_path
+    end 
   end
 
   private
@@ -47,6 +65,7 @@ class LabSpecilitiesController < BaseController
       @lab_specility = LabSpecility.find(params[:id])
     end
     def set_departments
+      @colleges = College.pluck(:college_name,:id)
       @departments = Department.all.pluck(:department_name,:id)
     end
     def set_department
@@ -55,6 +74,6 @@ class LabSpecilitiesController < BaseController
     end
 
     def lab_specility_params
-      params.require(:lab_specility).permit(:department_id, :lab_name, :lab_incharge)
+      params.require(:lab_specility).permit(:college_id, :department_id, :lab_name, :lab_incharge)
     end
 end

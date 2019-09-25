@@ -7,11 +7,19 @@
 <div align="center">
   <h1>Students Deatails</h1>
   <div>
-    <%if @college.present? && @department.present?%>
+    <%if @college.present? && @department.present? && @student.present?%>
       <%= link_to 'Back', college_department_students_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
       <%= link_to 'marks',college_department_student_marks_path(@college,@department,@student),class: "btn btn-success",style:"color:black;font-family:bold;"%>     |    
       <%= link_to 'atttendence',college_department_student_attendences_path(@college,@department,@student),class: "btn btn-primary",style:"color:black;font-family:bold;"%>|
+    <%elsif @department.present? && @student.present? %>
+      <%= link_to 'Back',department_students_path(@department,@student),class:"btn btn-warning",style:"color:black;" %>
+      <%= link_to 'marks',department_student_marks_path(@department,@student),class: "btn btn-success",style:"color:black;font-family:bold;"%>     |    
+      <%= link_to 'atttendence',department_student_attendences_path(@department,@student),class: "btn btn-primary",style:"color:black;font-family:bold;"%>|
+    <%elsif @student.present? %>
+      <%= link_to 'marks',student_marks_path(@student),class: "btn btn-success",style:"color:black;font-family:bold;"%>     |    
+      <%= link_to 'atttendence',student_attendences_path(@student),class: "btn btn-primary",style:"color:black;font-family:bold;"%>|
     <%else%>
+    <%= link_to 'back',students_path,class: "btn btn-warning",style:"color:black;font-family:bold;"%>
       <%= link_to 'marks', marks_path,class: "btn btn-success",style:"color:black;font-family:bold;"%>
       <%= link_to 'Attendence', attendences_path,class: "btn btn-success",style:"color:black;font-family:bold;"%>
     <% end -%>

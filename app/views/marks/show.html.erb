@@ -33,11 +33,14 @@
   </p>
 </div>
 <div align="center">
-  <%if @college.present? && @department.present? && @student %>
-    <%= link_to 'Edit', edit_college_department_student_mark_path(@mark),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
-    <%= link_to 'Back', college_department_student_marks_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%if @college.present? && @department.present? && @student.present? %>
+    <%= link_to 'Edit', edit_college_department_student_mark_path(@college,@department,@student,@mark),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_student_marks_path(@college,@department,@student,@mark),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%elsif  @department.present? && @student.present? %>
+    <%= link_to 'Back', department_student_marks_path(@department,@student,@mark),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%elsif  @student.present? %>
+    <%= link_to 'Back', student_marks_path(@student,@mark),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%else%>
-    <%= link_to 'edit',edit_mark_path(@mark),class: "btn btn-success",style:"color:black;font-family:bold;" %>
     <%= link_to'back', marks_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%end%>
 </div>

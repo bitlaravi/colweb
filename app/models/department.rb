@@ -4,5 +4,5 @@ class Department < ApplicationRecord
   has_many :cources, dependent: :destroy
   has_many :staffs, dependent: :destroy
   has_many :students, dependent: :destroy
-  validates :department_name,:department_code, uniqueness: :true
+  validates :department_name,:department_code,presence: :true, uniqueness: :true
 end

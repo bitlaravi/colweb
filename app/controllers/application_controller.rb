@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
 	def after_sign_in_path_for(resource)
 		if resource.user_type == User::ADMIN
-			colleges_path(resource) 
+			colleges_path
 		elsif resource.user_type == User::COLLEGE
 			college = College.find_by(user_id: resource.id)
 			college_departments_path(college)
@@ -16,7 +16,8 @@ class ApplicationController < ActionController::Base
 			department = Department.find_by(user_id: resource.id)
 			department_path(department)
 		elsif resource.user_type == User::STAFF
-			college_department_staffs_path(resource)
+			staff = Staff.find_by(user_id: resource.id)
+			college_department_staffs_path(staff)
 		elsif resource.user_type == User::STUDENT
 			student = Student.find_by(user_id: resource.id)
 			student_path(student)

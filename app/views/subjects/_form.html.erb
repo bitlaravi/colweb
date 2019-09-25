@@ -20,7 +20,7 @@
         <%if @college.present? && @department.present?%>
           <%= form.hidden_field :college_id,value: params[:college_id]%>
         <%else%>
-          <label class="control-label col-sm-2" for=":college_id">College Id</label>
+          <label class="control-label col-sm-2" for=":college_id">College</label>
           <div class="col-sm-8">
             <%= form.select :college_id,options_for_select(@colleges,subject.college_id),{include_blank:true},{class: 'form-control'} %>
           </div>
@@ -31,7 +31,7 @@
         <%if @college.present? && @department.present?%>
           <%= form.hidden_field :department_id,value: params[:department_id]%>
         <%else%>
-          <label class="control-label col-sm-2" for="department_id">Department Id</label>
+          <label class="control-label col-sm-2" for="department_id">Department</label>
           <div class="col-sm-8">
             <%= form.select :department_id,options_for_select(@departments,subject.department_id),{include_blank:true},{class: 'form-control'} %>
           </div>

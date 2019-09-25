@@ -3,10 +3,14 @@ class MarksController < BaseController
   before_action :set_students, only: [:new, :edit, :update, :create]
   before_action :set_student
   def index
-    if params[:student_id].present?
-      @marks = Mark.includes(:student).where(student_id: params[:student_id]).order(student_name: :asc).references(:student)
+    if @college.present? && @department.present? && @student.present?
+      @marks = Mark.where(college_id: params[:college_id],department_id: params[:department_id],student_id: params[:student_id]).order(mark: :asc)
+    elsif @department.present? && @student.present?
+      @marks = Mark.where(department_id: params[:department_id],student_id: params[:student_id]).order(mark: :asc)
+    elsif @student.present?
+      @marks = Mark.where(student_id: params[:student_id]).order(mark: :asc)
     else
-      @marks = Mark.includes(:student).all.order(student_name: :asc).references(:student)
+      @marks = Mark.all.order(mark: :asc)
     end
   end
   def show
@@ -23,9 +27,13 @@ class MarksController < BaseController
     @mark = Mark.new(mark_params)
       if @mark.save
         if @college.present? && @department.present? && @student.present?
-          redirect_to college_department_student_marks_path(@college, @department, @student) 
+          redirect_to college_department_student_marks_path(@college, @department,@student)
+        elsif @department.present?
+          redirect_to department_student_marks_path(@department,@student)
+        elsif @student.present?
+          redirect_to student_marks_path(@student) 
         else
-          redirect_to @mark 
+          redirect_to marks_path 
         end
       else
         render 'new' 
@@ -34,7 +42,11 @@ class MarksController < BaseController
   def update
       if @mark.update(mark_params)
         if @college.present? && @department.present? && @student.present?
-        redirect_to college_department_student_marks_path 
+        redirect_to college_department_student_marks_path(@college, @department,@student)
+        elsif @department.present?
+          redirect_to department_student_marks_path(@department,@student)
+        elsif @student.present?
+          redirect_to student_marks_path(@student)
         else
           redirect_to marks_path
         end
@@ -46,7 +58,11 @@ class MarksController < BaseController
   def destroy
     @mark.destroy
     if @college.present? && @department.present? && @student.present?
-      redirect_to college_department_student_marks_url 
+      redirect_to college_department_student_marks_path(@college, @department,@student)
+    elsif @department.present?
+      redirect_to department_student_marks_path(@department,@student)
+    elsif @student.present?
+      redirect_to student_marks_path(@student) 
     else
       redirect_to marks_path
     end

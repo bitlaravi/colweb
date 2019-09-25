@@ -8,8 +8,14 @@
 	<div>
 		<%= render 'form', mark: @mark %>
 		<%if @college.present? && @department.present? && @student.present? %>
-			<%= link_to 'Show', college_department_student_mark_path,class:"btn btn-success",style:"color:black;" %> |
-			<%= link_to 'Back',college_department_student_marks_path,class:"btn btn-warning",style:"color:black;" %>
+			<%= link_to 'Show', college_department_student_mark_path(@college,@department,@student,@mark),class:"btn btn-success",style:"color:black;" %> |
+			<%= link_to 'Back',college_department_student_marks_path(@college,@department,@student,@mark),class:"btn btn-warning",style:"color:black;" %>
+		<%elsif  @department.present? && @student.present? %>
+			<%= link_to 'Show', department_student_mark_path(@department,@student,@mark),class:"btn btn-success",style:"color:black;" %> |
+			<%= link_to 'Back',department_student_marks_path(@department,@student,@mark),class:"btn btn-warning",style:"color:black;" %>
+		<%elsif   @student.present? %>
+			<%= link_to 'Show', student_mark_path(@student,@mark),class:"btn btn-success",style:"color:black;" %> |
+			<%= link_to 'Back',student_marks_path(@student,@mark),class:"btn btn-warning",style:"color:black;" %>
 		<%else%>
 			<%= link_to 'Show', mark_path,class:"btn btn-success",style:"color:black;" %> |
 			<%= link_to 'Back', marks_path ,class:"btn btn-warning",style:"color:black;" %>

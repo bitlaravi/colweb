@@ -3,7 +3,15 @@ class AttendencesController < BaseController
   before_action :set_students, only: [:new, :edit, :update, :create]
   before_action :set_student
   def index
-    @attendences = Attendence.includes(:student).where(student_id: params[:student_id]).order(student_name: :asc).references(:student)
+    if @college.present? && @department.present? && @student.present?
+      @attendences = Mark.where(college_id: params[:college_id],department_id: params[:department_id],student_id: params[:student_id]).order(attendence: :asc)
+    elsif @department.present? && @student.present?
+      @attendences = Mark.where(department_id: params[:department_id],student_id: params[:student_id]).order(attendence: :asc)
+    elsif @student.present?
+      @attendences = Mark.where(student_id: params[:student_id]).order(attendence: :asc)
+    else
+      @attendences = Mark.all.order(subject: :asc)
+    end
   end
 
   def show
@@ -19,22 +27,39 @@ class AttendencesController < BaseController
   def create
     @attendence = Attendence.new(attendence_params)
       if @attendence.save
-        redirect_to college_department_student_attendences_path
+        if @college.present? && @department.present? && @student.present?
+          redirect_to college_department_student_attendences_path(@college,@department,@student)
+        elsif @department.present?
+          redirect_to department_student_attendences_path(@department,@student)
+        elsif @student.present?
+          redirect_to student_attendences_path(@student)
+        else
+          redirect_to attendences_path 
+        end
       else
         render 'new'
       end
   end
 
   def update
-      if @attendence.update(attendence_params)
-        redirect_to college_department_student_attendence_path
+      if @college.present? && @department.present? && @student.present?
+        redirect_to college_department_student_attendences_path(@college,@department,@student)
+      elsif @department.present?
+        redirect_to department_student_attendences_path(@department,@student)
+      elsif @student.present?
+        redirect_to student_attendences_path(@student)
       else
         render 'edit'
       end
   end
   def destroy
-    @attendence.destroy
-    redirect_to college_department_student_attendences_url
+    if @college.present? && @department.present? && @student.present?
+      redirect_to college_department_student_attendences_path(@college,@department,@student)
+    elsif @department.present?
+      redirect_to department_student_attendences_path(@department,@student)
+    elsif @student.present?
+      redirect_to student_attendences_path(@student)
+    end   
   end
 
   private

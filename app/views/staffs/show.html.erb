@@ -44,9 +44,12 @@
 </div>
 <div align="center">
   <%if @college.present? && @department.present? %>
-    <%= link_to 'Edit', edit_college_department_staff_path(@staff),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
-    <%= link_to 'Back', college_department_staffs_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
-  <%else current_user.user_type == User::DEPARTMENT %>
+    <%= link_to 'Edit', edit_college_department_staff_path(@college,@deprtment,@staff),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', college_department_staffs_path(@college,@deprtment,@staff),class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%elsif @department.present? %>
+    <%= link_to 'Edit', edit_department_staff_path(@deprtment,@staff),class: "btn btn-success",style:"color:black;font-family:bold;" %> |
+    <%= link_to 'Back', department_staffs_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
+  <%else %>
     <%= link_to 'edit',edit_staff_path,class: "btn btn-success",style:"color:black;font-family:bold;" %>
     <%= link_to'back', staffs_path,class: "btn btn-warning",style:"color:black;font-family:bold;" %>
   <%end%>

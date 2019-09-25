@@ -9,9 +9,18 @@
   <%if @college.present? && @department.present?%>
     <%= link_to 'New Student', new_college_department_student_path(@college, @department),class: "btn btn-success",style:"color:black;" %>
     <%= link_to 'back', college_department_path(@college,@department),class: "btn btn-warning",style:"color:black;" %>
-  <%else current_user.user_type == User::DEPARTMENT %>
-    <%= link_to 'New Student', new_student_path,class: "btn btn-info",style:"color:black;" %>
-    <%= link_to 'back', department_path(@department),class: "btn btn-warning",style:"color:black;" %>
+  <%else%>
+    <%if current_user.user_type == User::ADMIN%>
+      <%= link_to 'New Student', new_student_path,class: "btn btn-info",style:"color:black;" %>
+
+      <%= link_to 'back', colleges_path,class: "btn btn-warning",style:"color:black;" %>
+    <%else %>
+      <%if current_user.user_type == User::DEPARTMENT%>
+        <%= link_to 'New Student', new_department_student_path(@department),class: "btn btn-info",style:"color:black;" %>
+
+        <%= link_to 'back', department_path(@department),class: "btn btn-warning",style:"color:black;" %>
+      <% end -%>
+    <% end -%>
   <%end%>
 </div><br>
 
@@ -37,10 +46,14 @@
           <td><%= link_to 'View Full Deatails', college_department_student_path(@college,@department,student),class: "btn btn-info",style:"color:black;" %>
               <%= link_to 'Edit', edit_college_department_student_path(@college,@department,student),class: "btn btn-primary",style:"color:black;" %>
               <%= link_to 'Delete', college_department_student_path(@college,@department,student),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%elsif @department.present?%>
+          <td><%= link_to 'View Full Deatails', department_student_path(@department,student),class: "btn btn-info",style:"color:black;" %>
+                <%= link_to 'Edit', edit_department_student_path(@department,student),class: "btn btn-primary",style:"color:black;" %>
+                <%= link_to 'Delete', department_student_path(@department,student),class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <%else%>
           <td><%= link_to 'View Full Deatails', student,class: "btn btn-info",style:"color:black;" %>
               <%= link_to 'Edit', edit_student_path(student) ,class: "btn btn-primary",style:"color:black;"%>
-              <%= link_to 'Delete', student,class: "btn btn-danger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <%= link_to 'Delete', student,class: "btn btn-d anger",style:"color:black;", method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end -%>
       </tr>
     <% end %>

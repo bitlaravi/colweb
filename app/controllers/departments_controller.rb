@@ -35,7 +35,7 @@ class DepartmentsController < BaseController
       if @college.present?
       redirect_to college_departments_path 
       else
-        redirect_to department_path
+        redirect_to departments_path
       end
     else
      render 'edit' 

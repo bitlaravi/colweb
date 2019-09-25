@@ -1,10 +1,14 @@
 class CourcesController < BaseController
   before_action :set_cource, only: [:show, :edit, :update, :destroy]
-  before_action :set_colleges, only: [:new, :edit, :update, :crete]
-  before_action :set_college
+  before_action :set_departments, only: [:new, :edit, :update, :crete]
+  before_action :set_department
 
   def index
-    @cources = Cource.where(college_id: params[:college_id], department_id: params[:department_id])
+    if @college.present? && @department.present?
+      @cources = Cource.where(college_id: params[:college_id],department_id: params[:department_id]).order(cource: :asc)
+    elsif @department.present?
+      @cources= Cource.where(department_id: params[:department_id]).order(cource: :asc)
+    end
   end
 
   def show
@@ -21,7 +25,13 @@ class CourcesController < BaseController
     @cource = Cource.new(cource_params)
 
     if @cource.save
-      redirect_to college_department_cources_path 
+      if @college.present? && @department.present? 
+        redirect_to college_department_cources_path(@college, @department)
+      elsif @department.present?
+        redirect_to department_cources_path(@department) 
+      else
+        redirect_to cources_path
+      end 
     else
        render 'new'
     end
@@ -29,28 +39,39 @@ class CourcesController < BaseController
 
   def update
     if @cource.update(cource_params)
-      redirect_to college_department_cource_path 
+      if @college.present? && @department.present? 
+        redirect_to college_department_cources_path(@college, @department)
+      elsif @department.present?
+        redirect_to department_cources_path(@department) 
+      else
+        redirect_to cources_path
+      end
     else
       render 'edit'
     end
   end
   def destroy
     @cource.destroy
-      redirect_to college_department_cources_url 
+    if @college.present? && @department.present? 
+      redirect_to college_department_cources_path(@college, @department)
+    elsif @department.present?
+      redirect_to department_cources_path(@department)  
+    else
+      redirect_to cources_path
+    end 
   end
 
   private
     def set_cource
       @cource = Cource.find(params[:id])
     end
-    def set_colleges
-      @colleges = College.all.pluck(:college_name,:id)
-      
+    def set_departments
+      @colleges = College.pluck(:college_name,:id)
+      @departments = Department.all.pluck(:department_name,:id)
     end
-    def set_college
-      @college = College.find_by(id: params[:college_id])
+    def set_department
       @department = Department.find_by(id: params[:department_id])
-      
+      @college = College.find_by(id: params[:college_id])
     end
 
     def cource_params
